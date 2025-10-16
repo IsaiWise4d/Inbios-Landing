@@ -1,0 +1,226 @@
+---
+const navItems = [
+  { name: 'Inicio', href: '/' },
+  { name: 'Productos', href: '/productos' },
+  { name: 'Próximos Lanzamientos', href: '/proximos-lanzamientos' },
+  { name: 'Eventos', href: '/eventos' },
+  { name: 'Contacto', href: '/contacto' },
+];
+---
+
+<header class="fixed top-6 left-0 right-0 z-50 px-4 animate-fade-in">
+  <div class="max-w-7xl mx-auto">
+    <nav class="bg-black/80 backdrop-blur-xl rounded-full border border-white/10 shadow-2xl shadow-black/50 px-8 py-4 transition-all duration-300 hover:shadow-[0_20px_60px_-15px_rgba(212,175,55,0.3)]">
+      <div class="flex items-center justify-between gap-8">
+        
+        <!-- Logo -->
+        <a href="/" class="flex items-center gap-3 group flex-shrink-0">
+          <div class="relative">
+            <img 
+              src="/img/logo-inbios.svg" 
+              alt="INBIOS Logo" 
+              class="h-8 lg:h-10 w-auto transition-transform duration-300 group-hover:scale-110"
+            />
+            <div class="absolute inset-0 bg-gradient-to-r from-[#D4AF37]/20 to-transparent rounded-lg blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation - Centro -->
+        <div class="hidden lg:flex items-center justify-center gap-2 flex-1">
+          {navItems.map((item) => (
+            <a
+              href={item.href}
+              class="nav-link relative px-4 py-2 text-sm font-medium text-white/80 hover:text-[#D4AF37] transition-all duration-300 group whitespace-nowrap"
+            >
+              <span class="relative z-10">{item.name}</span>
+              <span class="absolute inset-0 bg-[#D4AF37]/10 rounded-full scale-0 group-hover:scale-100 transition-transform duration-300"></span>
+              <span class="absolute bottom-1 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent group-hover:w-3/4 transition-all duration-300"></span>
+            </a>
+          ))}
+        </div>
+
+        <!-- CTA Buttons - Derecha -->
+        <div class="flex items-center gap-3 flex-shrink-0">
+          <a
+            href="https://api.whatsapp.com/send/?phone=573117525330&text&type=phone_number&app_absent=0"
+            target="_blank"
+            class="hidden lg:flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-[#D4AF37] to-[#F4D03F] text-black font-semibold rounded-full hover:shadow-[0_0_30px_rgba(212,175,55,0.6)] hover:scale-105 transition-all duration-300 group text-sm whitespace-nowrap"
+          >
+            <svg class="w-4 h-4 transition-transform duration-300 group-hover:rotate-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+            </svg>
+            <span>Contáctanos</span>
+          </a>
+          
+          <a
+            href="https://soyinbios.com/wp-login.php?redirect_to=https%3A%2F%2Fsoyinbios.com%2F&bp-auth=1&action=bpnoaccess"
+            class="hidden lg:flex px-5 py-2.5 border-2 border-[#D4AF37] text-[#D4AF37] font-semibold rounded-full hover:bg-[#D4AF37] hover:text-black hover:scale-105 transition-all duration-300 text-sm whitespace-nowrap"
+            target="_blank"
+          >
+            Login
+          </a>
+
+          <!-- Mobile Menu Button -->
+          <button
+            id="mobile-menu-button"
+            class="lg:hidden p-2 text-white/80 hover:text-[#D4AF37] transition-colors duration-300"
+            aria-label="Toggle menu"
+          >
+            <svg class="w-6 h-6 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div
+      id="mobile-menu"
+      class="lg:hidden mt-4 bg-black/95 backdrop-blur-xl rounded-3xl border border-white/10 shadow-2xl overflow-hidden max-h-0 opacity-0 transition-all duration-500 ease-in-out"
+    >
+      <div class="p-6 space-y-2">
+        {navItems.map((item, index) => (
+          <a
+            href={item.href}
+            class="mobile-nav-link block px-6 py-3 text-white/80 hover:text-[#D4AF37] hover:bg-[#D4AF37]/10 rounded-2xl transition-all duration-300 transform hover:translate-x-2"
+            style={`animation-delay: ${index * 50}ms`}
+          >
+            {item.name}
+          </a>
+        ))}
+        <div class="pt-4 space-y-3 border-t border-white/10">
+          <a
+            href="/contacto"
+            class="flex items-center justify-center gap-2 w-full px-6 py-3 bg-gradient-to-r from-[#D4AF37] to-[#F4D03F] text-black font-semibold rounded-2xl hover:shadow-[0_0_30px_rgba(212,175,55,0.6)] transition-all duration-300"
+          >
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+            </svg>
+            Contáctanos
+          </a>
+          <a
+            href="/login"
+            class="flex justify-center w-full px-6 py-3 border-2 border-[#D4AF37] text-[#D4AF37] font-semibold rounded-2xl hover:bg-[#D4AF37] hover:text-black transition-all duration-300"
+          >
+            Login
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<style>
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slide-in {
+    from {
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.8s ease-out forwards;
+  }
+
+  #mobile-menu.open {
+    max-height: 600px;
+    opacity: 1;
+  }
+
+  #mobile-menu.open .mobile-nav-link {
+    animation: slide-in 0.4s ease-out forwards;
+  }
+
+  .nav-link.active {
+    color: #D4AF37;
+  }
+
+  .nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: 4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 75%;
+    height: 2px;
+    background: linear-gradient(to right, transparent, #D4AF37, transparent);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @supports (backdrop-filter: blur(20px)) {
+    nav {
+      backdrop-filter: blur(20px) saturate(180%);
+    }
+  }
+</style>
+
+<script>
+  const mobileMenuButton = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  mobileMenuButton?.addEventListener('click', () => {
+    mobileMenu?.classList.toggle('open');
+    
+    const icon = mobileMenuButton.querySelector('svg');
+    if (icon) {
+      icon.style.transform = mobileMenu?.classList.contains('open') 
+        ? 'rotate(90deg)' 
+        : 'rotate(0deg)';
+    }
+  });
+
+  document.addEventListener('click', (e) => {
+    const target = e.target as Node;
+    if (!mobileMenuButton?.contains(target) && !mobileMenu?.contains(target)) {
+      mobileMenu?.classList.remove('open');
+      const icon = mobileMenuButton?.querySelector('svg');
+      if (icon) {
+        icon.style.transform = 'rotate(0deg)';
+      }
+    }
+  });
+
+  const currentPath = window.location.pathname;
+  const navLinks = document.querySelectorAll('.nav-link');
+  
+  navLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href === currentPath || (currentPath === '/' && href === '/')) {
+      link.classList.add('active');
+    }
+  });
+
+  let lastScroll = 0;
+  const header = document.querySelector('header');
+
+  window.addEventListener('scroll', () => {
+    const currentScroll = window.pageYOffset;
+    
+    if (currentScroll > lastScroll && currentScroll > 100) {
+      header?.style.setProperty('transform', 'translateY(-150%)');
+    } else {
+      header?.style.setProperty('transform', 'translateY(0)');
+    }
+    
+    lastScroll = currentScroll;
+  });
+</script>

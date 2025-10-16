@@ -1,0 +1,95 @@
+---
+// Hero.astro - Full screen background image with text and parallax
+---
+
+<section class="relative h-screen w-full overflow-hidden">
+  <!-- Background Image with Parallax -->
+  <img 
+    id="hero-bg"
+    src="/img/fondo1.jpg" 
+    alt="INBIOS Background" 
+    class="w-full h-[110vh] object-cover"
+    style="transform: translateY(0)"
+  />
+  
+  <!-- Dark Overlay for better text readability -->
+  <div class="absolute inset-0 bg-black/40"></div>
+  
+  <!-- Text Content with Parallax -->
+  <div id="hero-text" class="absolute bottom-16 left-6 right-6 md:bottom-32 md:left-auto md:right-24 lg:bottom-30 lg:right-32">
+    <div class="max-w-3xl text-left">
+      <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-[--font-weight-light] text-white leading-tight animate-fade-in">
+        Soluciones biomédicas innovadoras que van 
+        <span class="italic font-[--font-weight-normal]" style="color: #D4AF37;">de la mano</span> 
+        con el futuro
+      </h1>
+    </div>
+  </div>
+</section>
+
+<style>
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in {
+    animation: fade-in 1.2s ease-out forwards;
+  }
+  
+  /* Smooth parallax - no transitions, pure transform */
+  #hero-bg,
+  #hero-text {
+    will-change: transform;
+  }
+</style>
+
+<script>
+  // Smooth parallax effect on scroll
+  const heroSection = document.querySelector('section');
+  const heroBg = document.getElementById('hero-bg');
+  const heroText = document.getElementById('hero-text');
+  
+  let lastScrollY = 0;
+  let ticking = false;
+  
+  const updateParallax = () => {
+    const scrolled = window.pageYOffset;
+    const heroHeight = heroSection?.offsetHeight || 0;
+    
+    // Only apply parallax while hero is visible
+    if (scrolled < heroHeight) {
+      // Background image moves slower (0.3x speed) - smooth and subtle
+      if (heroBg) {
+        const bgTransform = scrolled * 0.3;
+        heroBg.style.transform = `translateY(${bgTransform}px)`;
+      }
+      
+      // Text moves in opposite direction (0.2x speed) - creates depth
+      if (heroText) {
+        const textTransform = scrolled * -0.2;
+        heroText.style.transform = `translateY(${textTransform}px)`;
+      }
+    }
+    
+    ticking = false;
+  };
+  
+  const onScroll = () => {
+    lastScrollY = window.pageYOffset;
+    
+    if (!ticking) {
+      window.requestAnimationFrame(updateParallax);
+      ticking = true;
+    }
+  };
+  
+  // Use passive listener for better performance
+  window.addEventListener('scroll', onScroll, { passive: true });
+</script>
